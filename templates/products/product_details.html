@@ -1,0 +1,97 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ product.name }} | TechStore{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <div class="col-lg-5">
+
+            <img
+
+                src="{{ url_for('static', filename='images/products/' + product.image) }}"
+
+                class="img-fluid rounded shadow">
+
+        </div>
+
+        <div class="col-lg-7">
+
+            <h2>
+
+                {{ product.name }}
+
+            </h2>
+
+            <h5 class="text-muted">
+
+                {{ product.brand }}
+
+            </h5>
+
+            <hr>
+
+            <h3 class="text-primary">
+
+                ₹{{ "{:,.0f}".format(product.price) }}
+
+            </h3>
+
+            <p>
+
+                ⭐ {{ product.rating }}/5
+
+            </p>
+
+            <p>
+
+                <strong>Category:</strong>
+
+                {{ product.category }}
+
+            </p>
+
+            <p>
+
+                <strong>Stock:</strong>
+
+                {{ product.stock }}
+
+            </p>
+
+            <hr>
+
+            <p>
+
+                {{ product.description }}
+
+            </p>
+
+<div class="mt-4">
+
+    <a
+        href="{{ url_for('cart.add_to_cart', product_id=product.id) }}"
+        class="btn btn-primary">
+
+        <i class="bi bi-cart-plus"></i>
+
+        Add To Cart
+
+    </a>
+
+    <a
+        href="{{ url_for('products.products_page') }}"
+        class="btn btn-outline-secondary ms-2">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Back
+
+    </a>
+
+</div>
+
+{% endblock %}

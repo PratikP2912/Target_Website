@@ -1,0 +1,102 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Products | TechStore{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2>Products</h2>
+
+            <p class="text-muted">
+                Browse our latest gaming hardware.
+            </p>
+
+        </div>
+
+        <form method="GET" action="{{ url_for('products.products_page') }}">
+
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Search products..."
+                style="width:300px;">
+
+        </form>
+
+    </div>
+
+    <div class="row">
+
+        {% for product in products %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+
+            <div class="card product-card shadow-sm h-100">
+
+                <img
+                    src="{{ url_for('static', filename='images/products/' + product.image) }}"
+                    class="card-img-top product-image">
+
+                <div class="card-body">
+
+                    <span class="badge bg-primary mb-2">
+
+                        {{ product.category }}
+
+                    </span>
+
+                    <h5>
+
+                        {{ product.name }}
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        {{ product.brand }}
+
+                    </p>
+
+                    <p>
+
+                        ⭐ {{ product.rating }}/5
+
+                    </p>
+
+                    <h4 class="text-primary">
+
+                        ₹{{ "{:,.0f}".format(product.price) }}
+
+                    </h4>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+
+                    <a
+                        href="{{ url_for('products.product_details', product_id=product.id) }}"
+                        class="btn btn-primary w-100">
+
+                        View Details
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
